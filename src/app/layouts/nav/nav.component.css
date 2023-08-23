@@ -1,0 +1,18 @@
+.nav-link{
+  font-family: 'Raleway', sans-serif;
+  color: var(--quinary);
+  text-shadow:
+    1px 1px 3px var(--quinary);
+  font-size: 1.2rem;
+  transition: 0.3s ease-in-out;
+}
+.nav-link:hover{
+  color: var(--quinary);
+
+}
+.bar:hover .nav-link {
+  filter: blur(5px);
+}
+.bar:hover .nav-link:hover {
+  filter: blur(0px);
+}

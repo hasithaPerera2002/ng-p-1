@@ -1,0 +1,78 @@
+<div class="container-fluid ">
+  <div class="row ">
+    <div class="content-bg">
+      <form (ngSubmit)="status === 'Add'? onSubmit() : onUpdate()" [formGroup]="form" class="form col-md-12">
+        <div class="col-md-12 text-center m-2 p-2">
+          <h1>{{status}} - Content - Form</h1>
+        </div>
+        <hr>
+        <div class="form-group m-2 p-2 col-md-4 ">
+          <label for="town">Town</label>
+          <input type="text" class="form-control  ng-valid "
+                 [ngClass]="{'is-invalid':formControl['town'].invalid && formControl['town'].touched}" id="town"
+                 formControlName="town">
+          <div *ngIf="form.get('town')!.invalid && form.get('town')!.touched"
+               class="alert alert-danger ">
+            Town is required
+          </div>
+        </div>
+
+        <div class="form-group m-2 p-2">
+          <label for="desc">Description</label>
+          <textarea class="form-control" cols="20" rows="10" id="desc" name="desc"
+                    [ngClass]="{'is-invalid': form.get('desc')!.invalid && form.get('desc')!.touched}"
+                    formControlName="desc"></textarea>
+          <div *ngIf="form.get('desc')!.invalid && form.get('desc')!.touched" class="alert alert-danger">
+            Description is required
+          </div>
+        </div>
+        <!--image preview-->
+        <img [src]="url" height="400" alt="" class="m-2 p-2 img-fluid">
+
+
+          <div class="col-md-12 m-2 p-2 img-class d-inline-flex justify-content-lg-start">
+            <div class="form-group col-md-3">
+              <input type="file" class="form-control" (change)="onFileSelect($event)" formControlName="file"
+                     id="fileInput">
+            </div>
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" placeholder="Caption" formControlName="caption">
+            </div>
+            <div class="form-group col-md-3">
+              <input type="text" class="form-control" placeholder="Place" formControlName="place">
+            </div>
+
+          </div>
+
+
+
+        <div>
+          <button class="btn btn-success m-4 " type="submit" [disabled]="form.invalid">Submit</button>
+        </div>
+      </form>
+    </div>
+
+   <div class="col-md-6" *ngIf="destinations?.length>0">
+         <table class="table">
+           <thead>
+           <tr>
+             <th>image</th>
+             <th>destination</th>
+             <th>town</th>
+             <th>caption</th>
+             <th>description</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr *ngFor="let des of destinations " (click)="onLoadData(des)">
+             <td><img [src]="des.file" alt="Image" class="image-cell"></td>
+             <td>{{des.destination_name}}</td>
+             <td>{{des.town}}</td>
+             <td>{{des.caption}}</td>
+             <td>{{des.description}}</td>
+           </tr>
+           </tbody>
+         </table>
+       </div>
+  </div>
+</div>
